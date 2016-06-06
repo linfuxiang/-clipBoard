@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style type="text/css">
+	.a{
+		height: 0;
+	}
+</style>
+</head>
+<body>
+	<div id="myDiv">123</div>
+	<button>111</button>
+	<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+	<script src="ZeroClipboard.min.js"></script>
+	<script>
+	var client = new ZeroClipboard( $('button') );
+
+	client.on( 'ready', function(event) {
+	// console.log( 'movie is loaded' );
+
+	client.on( 'copy', function(event) {
+	event.clipboardData.setData('text/plain', $('#myDiv').text());
+	} );
+
+	client.on( 'aftercopy', function(event) {
+	console.log('Copied text to clipboard: ' + event.data['text/plain']);
+	} );
+	} );
+
+	client.on( 'error', function(event) {
+	// console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+	ZeroClipboard.destroy();
+	} );
+	</script>
+</body>
+</html>
